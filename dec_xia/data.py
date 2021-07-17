@@ -12,13 +12,11 @@ def checkdatabase(name, ID):
     db = cluster['discord_bot_database']
     collection = db['member']
     
-    id = str(ID)
-    membername = str(name)
-    result = collection.find_one({membername : id})
+    result = collection.find_one({str(name) : str(ID)})
     
     if not result:
         
-        post = { membername : id , "wallet" : 0, "bank" : 0}
+        post = { str(name) : str(ID) , "wallet" : 0, "bank" : 0}
 
         collection.insert_one(post)
         return False
